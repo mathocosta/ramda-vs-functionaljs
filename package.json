@@ -1,0 +1,18 @@
+{
+  "name": "ramda-vs-functionaljs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-filter": "node src/filter_default.js && node src/filter_ramda.js",
+    "test-find": "node src/find_default.js && node src/find_ramda.js",
+    "test-map": "node src/map_default.js && node src/map_ramda.js",
+    "test-reduce": "node src/reduce_default.js && node src/reduce_ramda.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "performance-now": "^2.1.0",
+    "ramda": "^0.26.1"
+  }
+}
