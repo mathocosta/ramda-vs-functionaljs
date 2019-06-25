@@ -18,7 +18,7 @@ function memoryUsage() {
 
 /**
  * Carrega os objetos no arquivo JSON passado como parâmetro na função.
- * @param  {string} filename Nome do arquivo a ser carregado
+ * @param  {String} filename Nome do arquivo a ser carregado
  */
 function loadData(filename) {
     const rawData = fs.readFileSync(path.resolve(__dirname, filename))
@@ -29,14 +29,22 @@ function loadData(filename) {
 
 /**
  * Computa o tempo de execução do callback passado como parâmetro
+ * executado na quantidade de vezes passada como parâmetro (o padrão é 1000).
  * @param  {Function} callback Bloco de código a ser executado
+ * @param  {Number} número de vezes que deve ser executado o callback e guardado os tempos
  */
-function elapsedTime(callback) {
-    let start = now()
-    callback()
-    let end = now()
+function elapsedTime(callback, numberOfIterations = 1000) {
+    let sum = 0
 
-    return (end-start).toFixed(4)
+    for (let i = 0; i < numberOfIterations; i++) {
+        let start = now()
+        callback()
+        let end = now()
+
+        sum += end - start
+    }
+
+    return (sum / numberOfIterations).toFixed(4)
 }
 
 module.exports = {
