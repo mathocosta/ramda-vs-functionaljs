@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-filter": "node src/filter_default.js && node src/filter_ramda.js",
-    "test-find": "node src/find_default.js && node src/find_ramda.js",
-    "test-map": "node src/map_default.js && node src/map_ramda.js",
-    "test-reduce": "node src/reduce_default.js && node src/reduce_ramda.js"
+    "test-filter": "node src/filter-default.js && node src/filter-ramda.js",
+    "test-find": "node src/find-default.js && node src/find-ramda.js",
+    "test-map": "node src/map-default.js && node src/map-ramda.js",
+    "test-reduce": "node src/reduce-default.js && node src/reduce-ramda.js",
+    "test": "npm run test-filter && npm run test-find && npm run test-map && npm run test-reduce",
+    "show-results": "budo index.js --live"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "performance-now": "^2.1.0",
     "ramda": "^0.26.1"
+  },
+  "devDependencies": {
+    "budo": "^11.6.2"
   }
 }

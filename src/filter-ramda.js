@@ -1,16 +1,18 @@
 const R = require('ramda')
 
-const { loadData, memoryUsage, elapsedTime } = require('./utils.js')
+const { loadData, memoryUsage, elapsedTime, printTestResults } = require('./utils.js')
 const { filterable } = require('./hooks.js')
 
 const users = loadData('data/small_dataset.json')
 
-console.log('Ramda Filter')
+console.log('\nRamda Filter')
 
 let time = elapsedTime(_ => {
     let ramdaFilter = R.filter(filterable, users)
 })
 
-console.log(time)
+let memoryUsageInfo = memoryUsage()
 
-memoryUsage()
+printTestResults(memoryUsageInfo, time)
+
+
