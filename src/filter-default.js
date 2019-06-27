@@ -1,4 +1,5 @@
-const { loadData, memoryUsage, elapsedTime, printTestResults } = require('./utils.js')
+const { loadData, memoryUsage, elapsedTime,
+        printTestResults, updateResultsFile } = require('./utils.js')
 const { filterable } = require('./hooks.js')
 
 const users = loadData('data/small_dataset.json')
@@ -13,4 +14,5 @@ let memoryUsageInfo = memoryUsage()
 
 printTestResults(memoryUsageInfo, time)
 
-
+const testResults = Object.assign(memoryUsageInfo, { time: time })
+updateResultsFile('filter', 'js', testResults)

@@ -15,29 +15,41 @@ function loadData(filename) {
 }
 
 /**
- * Atualiza o arquivo de resultados dos testes
+ *
  * @param  {Object} results resultados do último teste
  */
-function updateResultsFile(resultsChange) {
-    const resultsFilename = 'results.json'
+/**
+ * Atualiza o arquivo de resultados dos testes
+ * @param  {String} methodName nome do método que deve ser atualizado
+ * @param  {String} origin     origem do método (JS ou Ramda)
+ * @param  {Object} newResults resultados do último teste
+ */
+function updateResultsFile(methodName, origin, newResults) {
+    const resultsFilename = 'data/results.json'
 
-    let results = loadData(resultsFilename)
-    results = Object.assign(results, resultsChange)
+    let savedResults = loadData(resultsFilename)
+    savedResults[methodName][origin] = newResults
 
-    let resultsData = JSON.stringify(results)
+    let resultsData = JSON.stringify(savedResults)
 
-    fs.writeFileSync(resultsFilename, resultsData)
+    fs.writeFileSync(path.resolve(__dirname, resultsFilename), resultsData)
 }
 
 /**
  * Retorna as informações de memória de um processo NodeJS.
  * Os dados são dividos em RSS (Resident Set Size), heap total, heap usada e "external" que é
  * a memória usada pelos objetos C++ para dar suporte aos objetos criados pela V8.
+ * @return {Object} dados de memória usada
  */
 function memoryUsage() {
     const used = process.memoryUsage()
+    let formated = {}
 
-    return used
+    for (let key in used) {
+        formated[key] = Math.round(used[key] / 1024 / 1024 * 100) / 100
+    }
+
+    return formated
 }
 
 /**
@@ -70,7 +82,7 @@ function printTestResults(memoryUsageInfo, elapsedTimeRegistered) {
 
     for (let key in memoryUsageInfo) {
         console.log(
-            `${key.toUpperCase()}: ${Math.round(memoryUsageInfo[key] / 1024 / 1024 * 100) / 100} MB`
+            `${key.toUpperCase()}: ${memoryUsageInfo[key]} MB`
         )
     }
 }

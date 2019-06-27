@@ -1,4 +1,5 @@
-const { loadData, memoryUsage, elapsedTime, printTestResults } = require('./utils.js')
+const { loadData, memoryUsage, elapsedTime,
+        printTestResults, updateResultsFile } = require('./utils.js')
 const { reducer } = require('./hooks.js')
 
 const users = loadData('data/small_dataset.json')
@@ -12,3 +13,6 @@ let time = elapsedTime(_ => {
 let memoryUsageInfo = memoryUsage()
 
 printTestResults(memoryUsageInfo, time)
+
+const testResults = Object.assign(memoryUsageInfo, { time: time })
+updateResultsFile('reduce', 'js', testResults)
