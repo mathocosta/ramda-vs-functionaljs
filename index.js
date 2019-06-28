@@ -29,7 +29,7 @@ function formatResultsData(wantedKey, data) {
     const chartData = {
         labels: ['Filter', 'Find', 'Map', 'Reduce'],
         datasets: [{
-            label: 'Default Javascript',
+            label: 'Vanilla Javascript',
             backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
             borderColor: chartColors.red,
             borderWidth: 1,

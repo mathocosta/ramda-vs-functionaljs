@@ -2,7 +2,7 @@ const { loadData, memoryUsage, elapsedTime,
         printTestResults, updateResultsFile } = require('./utils.js')
 const { iterable } = require('./hooks.js')
 
-const users = loadData('data/small_dataset.json')
+const users = loadData('data/large_dataset.json')
 
 console.log('\nDefault JavaScript Map')
 
